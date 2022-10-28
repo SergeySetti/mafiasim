@@ -27,10 +27,10 @@ class Game:
     def init_game(self, players_strategies):
         self.create_10_players(players_strategies)
 
-    def create_10_players(self, players_strategies):
+    def create_10_players(self, strategies):
         from mafia.player import Player
         [
-            self.players.append(Player(p, self.predefined_roles.pop(), self, players_strategies[k]))
+            self.players.append(Player(p, self.predefined_roles.pop(), self, strategies[k][0], strategies[k][1]))
             for k, p in enumerate(range(1, 11))
         ]
 

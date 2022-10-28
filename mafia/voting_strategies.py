@@ -19,7 +19,7 @@ class AbstractStrategy:
         return placing_on_vote_probabilities
 
 
-class ChancesOfVotingForRed(AbstractStrategy):
+class ChancesOfVotingForRedIfRed(AbstractStrategy):
     def __init__(self, probability=0.5):
         self.probability = probability
 
@@ -27,12 +27,12 @@ class ChancesOfVotingForRed(AbstractStrategy):
         on_vote = player.get_players_putted_to_vote_except_me()
         p: Player
         for k, p in enumerate(on_vote):
-            if p.is_red():
+            if p.is_red() and player.is_red():
                 vote_probabilities[k] = self.probability
         return vote_probabilities
 
 
-class ChancesOfVotingForBlack(AbstractStrategy):
+class ChancesOfVotingForRedIfBlack(AbstractStrategy):
     def __init__(self, probability=0.5):
         self.probability = probability
 
@@ -40,7 +40,33 @@ class ChancesOfVotingForBlack(AbstractStrategy):
         on_vote = player.get_players_putted_to_vote_except_me()
         p: Player
         for k, p in enumerate(on_vote):
-            if p.is_maf():
+            if p.is_red() and player.is_maf():
+                vote_probabilities[k] = self.probability
+        return vote_probabilities
+
+
+class ChancesOfVotingForBlackIfRed(AbstractStrategy):
+    def __init__(self, probability=0.5):
+        self.probability = probability
+
+    def apply_voting_strategy(self, game: Game, player: Player, vote_probabilities: list):
+        on_vote = player.get_players_putted_to_vote_except_me()
+        p: Player
+        for k, p in enumerate(on_vote):
+            if p.is_maf() and player.is_red():
+                vote_probabilities[k] = self.probability
+        return vote_probabilities
+
+
+class ChancesOfVotingForBlackIfBlack(AbstractStrategy):
+    def __init__(self, probability=0.5):
+        self.probability = probability
+
+    def apply_voting_strategy(self, game: Game, player: Player, vote_probabilities: list):
+        on_vote = player.get_players_putted_to_vote_except_me()
+        p: Player
+        for k, p in enumerate(on_vote):
+            if p.is_maf() and player.is_maf():
                 vote_probabilities[k] = self.probability
         return vote_probabilities
 

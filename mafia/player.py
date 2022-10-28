@@ -6,8 +6,9 @@ from mafia.the_game import Game
 class Player:
     game: Game
 
-    def __init__(self, number, role, game, strategies=None):
+    def __init__(self, number, role, game, g_id, strategies=None, ):
         self.game = game
+        self.g_id = g_id
         self.number = number
         self.role = role
         self.is_killed = False
