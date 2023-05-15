@@ -1,7 +1,5 @@
 from math import *
-
 import pygame
-
 from mafia.voting_strategies import *
 
 pygame.init()
@@ -24,8 +22,8 @@ win.fill(white_yellow)
 
 
 typical_tactics = [
-    ChancesOfVotingForRed(0.5),
-    ChancesOfVotingForBlack(0.5),
+    ChancesOfVotingForRedIfRed(0.5),
+    ChancesOfVotingForBlackIfRed(0.5),
     AlwaysVoteForBlackCheckedBySheriff(),
     ChancesOfVotingForRedThatIsCheckedBySheriff(0),
     MafiaKillsUncoveredRed(1),
@@ -34,6 +32,7 @@ typical_tactics = [
     RedMustAvoidToPutOnVoteUncoveredRed(0),
 ]
 players_strategies = [typical_tactics for _ in range(10)]
+players_strategies = [[g_id, typical_tactics] for g_id in range(10)]
 
 game = Game()
 game.init_game(players_strategies)

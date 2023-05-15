@@ -1,7 +1,6 @@
 import datetime
 from collections import Counter
 from random import shuffle
-
 from numpy.random.mtrand import choice
 
 

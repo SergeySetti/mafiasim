@@ -1,5 +1,4 @@
 from numpy.random.mtrand import choice
-
 from mafia.the_game import Game
 
 
@@ -87,9 +86,6 @@ class Player:
         vote_probabilities = [0 for _ in self.get_players_putted_to_vote_except_me()]
         for s in self.strategies:
             vote_probabilities = s.apply_voting_strategy(self.game, self, vote_probabilities)
-
-        # Here the magic! Sum off all probabilities should be equal to one,
-        # so align the result probabilities list
         vote_probabilities = self.game.fix_and_align_probabilities(vote_probabilities)
         return vote_probabilities
 
