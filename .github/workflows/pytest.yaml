@@ -21,9 +21,10 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -e .
-        pip install pytest
+        # Install dependencies directly if needed
+        # pip install any-required-packages
         
     - name: Run tests
       run: |
-        pytest tests/
+        # Add the repository root to PYTHONPATH to make modules importable
+        PYTHONPATH=$PYTHONPATH:$(pwd) pytest tests/
